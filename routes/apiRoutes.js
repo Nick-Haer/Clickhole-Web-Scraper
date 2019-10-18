@@ -11,9 +11,14 @@ module.exports = function(app) {
 
     app.get("/", function (req, res) {
 
-        res.render("articles")
+
+        db.Article.find({}).then(results => {
+            res.render("articles", {
+                articles: results
+            })
 
 
+        })
 
 
 
@@ -30,9 +35,9 @@ module.exports = function(app) {
                 
 
 
-                db.Article.create(article)
-                .then((addedArticle) => console.log(addedArticle))
-                .catch((err) => console.error(err))
+                // db.Article.create(article)
+                // .then((addedArticle) => console.log(addedArticle))
+                // .catch((err) => console.error(err))
             });
 
 
@@ -41,6 +46,26 @@ module.exports = function(app) {
 
 
         })
+    })
+
+
+    app.post("/api/add/note", function(req, res) {
+    console.log(req.body.id)
+    // db.Note.create
+
+
+    })
+
+    app.get("/api/saved/articles", function(req, res) {
+
+        db.Article.find({saved: true}).then(results => {
+
+            res.render("articles", {
+                articles: results
+            })
+            
+        })
+
     })
 
 

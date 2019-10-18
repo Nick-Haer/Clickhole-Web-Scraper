@@ -1,27 +1,67 @@
 {{!-- {{#each }} --}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
+{{!-- <div id="modal">
+
+</div>
+
+<div class="modalContent">
+    <h1>Boogaloo</h1>
+    <p>Pt. 2</p>
+</div> --}}
+
 <body>
 
 
+    <div id="modal">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        <div id="modalContent">
+            <h3 class="modalTitle">Article Saved!</h3>
+                    <hr class="divider">
+            <p class="modalText">Go to Saved to check out your saved articles</p>
+            <button id="closeModal" class="btn btn-primary">Great</button>
+
+        </div>
+
+
+    </div>
+
+    {{#each articles}}
+
+
+    <div class="article" data-id={{id}} data-saved={{saved}}>
+
+        <div class="articleHeader">
+            <a class="articleLinks" target="blank" href={{url}}>
+                <h4 class="articleTitles">{{title}}</h4>
+            </a>
+            <div class="buttonsDiv">
+                {{!-- <button id={{id}} class="btn btn-success articleButtons addButton">Add Note</button>
+    <button id={{id}} class="btn btn-danger articleButtons deleteButton">Delete Note</button> --}}
+                <button id={{id}} class="btn btn-success articleButtons saveButton">{{#unless saved}}Save Article{{/unless}} {{#if saved}} Saved! {{/if}}</button>
+            </div>
+
+        </div>
+
+
+        <hr class="divider">
+        <div>{{summary}}</div>
+
+
+    </div>
+    {{/each}}
+
+
+
+
 </body>
+
 </html>
-
-
-

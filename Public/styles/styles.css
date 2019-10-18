@@ -37,6 +37,77 @@ color: whitesmoke;
 color: whitesmoke;
 }
 
-.mainLinks {
+.article {
+    border: solid black 5px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.divider {
+    border: solid black 1px;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.articleLinks {
+    color: black;
+    background-color: rgb(54, 53, 53);
+}
+.articleTitles {
+    margin-bottom: 0;
+    padding-bottom: 3px;
+    font-family: 'Playfair Display', serif;
+}
+.articleHeader {
+    background-color: #4094dd;
+}
+.articleButtons {
+    width: 10%;
+    margin-left: 1%;
+    color: rgb(54, 53, 53);
+}
+
+.buttonsDiv {
+    text-align: right;
+}
+
+.addButton {
 
 }
+
+.deleteButton {
+
+}
+
+body {
+    background-color: lightgray;
+
+}
+
+#modal {
+    display: none;
+    position: fixed; 
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: rgb(0,0,0,.5);
+}
+
+#modalContent {
+    background-color: lightgray;
+    margin: 10% auto;
+    padding: 10px;
+    border: 2px solid #4094dd;
+    width: 50%; 
+}
+
+.modalTitle {
+
+}
+
+.modalText {
+}
+
