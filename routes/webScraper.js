@@ -37,20 +37,23 @@ async function scrapeData() {
             articleInfo.push({
                 url: articleUrls[counter],
                 title: $("header").children("h1").text(),
-                summary: summary
+                summary: summary,
+                saved: false
 
             })
             counter++;
         })
 
 
-        console.log(articleInfo.length)
+
         return articleInfo
     })
 
 }
-scrapeData().then(results => console.log(results))
-console.log(scrapeData())
+
+module.exports = scrapeData
+// scrapeData().then(results => console.log(results))
+// console.log(scrapeData())
 
 
 

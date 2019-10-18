@@ -6,7 +6,8 @@ const Schema = mongoose.Schema
 const ArticleSchema = new Schema ({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 
     url: {
@@ -24,6 +25,10 @@ const ArticleSchema = new Schema ({
     note: {
         type: Schema.Types.ObjectId,
         ref: "Note"
+    },
+    saved: {
+        type: Boolean,
+        required: true
     }
 });
 

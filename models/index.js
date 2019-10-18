@@ -2,7 +2,7 @@ const Article = require("./Article");
 
 const Note = require("./Note")
 
-console.log(Article)
+// console.log(Article)
 
 
 module.exports = {
