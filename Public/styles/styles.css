@@ -1,0 +1,42 @@
+#scraper {
+    background-color: darkorange;
+    width: 15%;
+}
+
+#scraper:hover {
+    background-color: brown;
+}
+
+#siteTitle {
+    color: whitesmoke;
+}
+
+#mainImage {
+    background-image: url("../Images/D2115_143_304_1200.jpg") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    padding-top: 10%;
+    padding-bottom: 15%;
+    /* background-size: cover; */
+}
+
+#imageHeader {
+
+}
+
+#mainPrompt {
+    width: 20%;
+}
+
+#homeButton {
+color: whitesmoke;
+}
+
+#savedButton {
+color: whitesmoke;
+}
+
+.mainLinks {
+
+}
