@@ -22,10 +22,10 @@ const ArticleSchema = new Schema ({
         type: String,
         required: true
     },
-    note: {
+    note: [{
         type: Schema.Types.ObjectId,
         ref: "Note"
-    },
+    }],
     saved: {
         type: Boolean,
         required: true

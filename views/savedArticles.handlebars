@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-        <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+        <link rel="stylesheet" type="text/css" href="/styles/styles.css">
             <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -25,7 +25,7 @@
 <body>
 
 
-    <div id="modal">
+    {{!-- <div id="modal">
 
         <div id="modalContent">
             <h3 class="modalTitle">Article Saved!</h3>
@@ -34,6 +34,24 @@
             <button id="closeModal" class="btn btn-primary">Great</button>
 
         </div>
+
+
+    </div> --}}
+
+
+    <div id="noteModal">
+        <div id="noteModalContent">
+            <h3 id="notesHere" >Notes</h3>
+
+
+
+            <h3>New Note</h3>
+            <textarea name="" id="noteText" cols="30" rows="10"></textarea>
+            <button id="" class="btn btn-primary btn addNoteButton">Add Note</button>
+
+
+        </div>
+
 
 
     </div>
@@ -48,9 +66,7 @@
                 <h4 class="articleTitles">{{title}}</h4>
             </a>
             <div class="buttonsDiv">
-                {{!-- <button id={{id}} class="btn btn-success articleButtons addButton">Add Note</button>
-    <button id={{id}} class="btn btn-danger articleButtons deleteButton">Delete Note</button> --}}
-                <button id={{id}} class="btn btn-success articleButtons saveButton">{{#unless saved}}Save Article{{/unless}} {{#if saved}} Saved! {{/if}}</button>
+                <button id={{id}} class="btn btn-success articleButtons notesButton">Notes</button>
             </div>
 
         </div>
