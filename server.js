@@ -29,7 +29,7 @@ app.set("view engine", "handlebars");
 
 
 
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bottomlessPitDB", { useNewUrlParser: true });
 
 
 
