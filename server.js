@@ -26,10 +26,11 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/bottomlessPitDB";
 
+console.log(MONGODB_URI);
 
-
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bottomlessPitDB", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
 
