@@ -71,9 +71,9 @@ $(document).ready(function () {
         }).then((notesData) => {
             console.log(notesData)
 
-
+            $("#notesHere").empty()
             for (let note of notesData) {
-                $("#notesHere").empty()
+
                 const noteHolder = $("<div>")
                 const noteText = $("<span>").text(note.body)
                 const deleteButton = $(`<button id="${note._id}"class="btn btn-primary deleteButton">Delete</button>`)
