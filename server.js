@@ -26,7 +26,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 
-const MONGODB_URI = "mongodb://heroku_1p3q75q2:toef9sj05j7o2a7gfee7pilk0g@ds337418.mlab.com:37418/heroku_1p3q75q2";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/bottomlessPitDB";
 
 console.log(MONGODB_URI);
 
