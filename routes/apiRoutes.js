@@ -12,6 +12,8 @@ module.exports = function (app) {
     app.get("/", function (req, res) {
 
 
+        console.log("the boogalooginh2")
+
         db.Article.find({}).then(results => {
             res.render("articles", {
                 articles: results
@@ -36,14 +38,15 @@ module.exports = function (app) {
 
 
                 db.Article.create(article)
-                    .then((addedArticle) => console.log(addedArticle))
-                    .catch((err) => console.error(err))
+                    .then((addedArticle) => {
+
+                    })
+                    .catch((err) =>  console.log(err))
             });
 
 
 
-
-
+            res.status(200).send("sent")
 
         })
     })

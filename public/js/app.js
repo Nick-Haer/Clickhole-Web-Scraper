@@ -10,13 +10,15 @@ $(document).ready(function () {
     $("#scraper").on("click", (event) => {
         console.log("clicked")
 
-        event.preventDefault()
+        // event.preventDefault()
 
         $.ajax({
             method: "GET",
             url: "/api/articles"
         })
             .then(response => {
+                console.log(response)
+                console.log("waterloo pt.2")
                 window.location.replace("/")
 
 
@@ -98,7 +100,8 @@ $(document).ready(function () {
         console.log("boogaloog")
         const noteId = event.target.id
         console.log(noteId)
-        event.target.remove()
+        event.currentTarget.parentNode.remove()
+
  
 
         $.ajax({
