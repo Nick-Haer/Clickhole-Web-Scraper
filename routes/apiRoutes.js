@@ -15,8 +15,13 @@ module.exports = function (app) {
         console.log("the boogalooginh2")
 
         db.Article.find({}).then(results => {
+            let reversedResults = results.reverse()
+            let displayResults = [];
+            for(let i = 0; i < 20; i++) {
+                displayResults.push(reversedResults[i])
+            }
             res.render("articles", {
-                articles: results
+                articles: displayResults
             })
 
 

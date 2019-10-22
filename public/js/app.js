@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#scraper").on("click", (event) => {
         console.log("clicked")
 
-        // event.preventDefault()
+        event.preventDefault()
 
         $.ajax({
             method: "GET",
@@ -18,8 +18,8 @@ $(document).ready(function () {
         })
             .then(response => {
                 console.log(response)
-                console.log("waterloo pt.2")
-                window.location.replace("/")
+                // console.log("waterloo pt.2")
+                window.location.reload()
 
 
 
@@ -57,15 +57,7 @@ $(document).ready(function () {
 
 
 
-
-
-    $(".notesButton").on("click", (event) => {
-
-        let articleId = event.target.id
-
-        $(".addNoteButton").attr("id", articleId)
-
-        $("#noteModal").css("display", "block")
+    function getNotes (articleId) {
 
         $.ajax({
             method: "GET",
@@ -85,14 +77,19 @@ $(document).ready(function () {
 
             }
         })
+        
+    }
 
+    $(".notesButton").on("click", (event) => {
 
+        let articleId = event.target.id
 
+        $(".addNoteButton").attr("id", articleId)
 
+        $("#noteModal").css("display", "block")
 
-        // $.ajax({
-        //     method: "GET"
-        // })
+        getNotes(articleId)
+
     })
 
 
@@ -125,6 +122,8 @@ $(document).ready(function () {
             data: {
                 body: text
             }
+        }).then(res => {
+            getNotes(articleId)
         })
     })
 
