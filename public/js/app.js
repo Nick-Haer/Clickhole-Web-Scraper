@@ -19,7 +19,7 @@ $(document).ready(function () {
             .then(response => {
                 console.log(response)
                 // console.log("waterloo pt.2")
-                location.reload()
+                location.replace("/")
 
 
 
