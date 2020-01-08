@@ -1,134 +1,101 @@
+const scrapeData = require('./webScraper');
 
-const scrapeData = require("./webScraper")
+const db = require('../models');
 
+console.log(Object.keys(db));
 
+module.exports = function(app) {
+  app.get('/', function(req, res) {
+    console.log('the boogalooginh2');
 
-const db = require("../models")
+    db.Article.find({}).then(results => {
+      let reversedResults = results.reverse();
+      let displayResults = [];
+      for (let i = 0; i < 20; i++) {
+        displayResults.push(reversedResults[i]);
+      }
+      res.render('articles', {
+        articles: displayResults,
+      });
+    });
+  });
 
-console.log(Object.keys(db))
+  app.get('/api/articles', function(req, res) {
+    console.log('electric');
+    scrapeData().then(results => {
+      // console.log(results)
+      results.forEach(article => {
+        db.Article.create(article)
+          .then(addedArticle => {})
+          .catch(err => console.log(err));
+      });
 
-module.exports = function (app) {
+      res.status(200).send('sent');
+    });
+  });
 
-    app.get("/", function (req, res) {
+  app.post('/api/save/article', function(req, res) {
+    db.Article.findOneAndUpdate({ _id: req.body.id }, { saved: true }).then(
+      savedArticle => {
+        // console.log(savedArticle)
+      }
+    );
+  });
 
+  app.post('/api/addNotes/:id', function(req, res) {
+    const articleId = req.params.id;
 
-        console.log("the boogalooginh2")
+    const text = req.body;
 
-        db.Article.find({}).then(results => {
-            let reversedResults = results.reverse()
-            let displayResults = [];
-            for(let i = 0; i < 20; i++) {
-                displayResults.push(reversedResults[i])
-            }
-            res.render("articles", {
-                articles: displayResults
-            })
+    console.log(text);
 
+    db.Note.create(text)
+      .then(note => {
+        // console.log(note)
+        return db.Article.findOneAndUpdate(
+          { _id: articleId },
+          { $push: { note: note._id } },
+          { new: true }
+        );
+      })
+      .then(result => {
+        // console.log(result)
+        res.status(200).end();
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).end();
+      });
+  });
 
-        })
+  app.get('/api/getNotes/:id', function(req, res) {
+    const articleId = req.params.id;
 
+    console.log(articleId);
 
+    db.Article.findOne({ _id: articleId })
+      .populate('note')
+      .exec((err, noteData) => {
+        console.log('boogaloo');
+        console.log(noteData.note);
+        res.status(200).json(noteData.note);
+      });
+  });
 
+  app.delete('/api/delete/:noteId', function(req, res) {
+    db.Note.findOne({ _id: req.params.noteId }).then(note => {
+      note
+        .remove()
+        .then(success => console.log(success))
+        .catch(err => console.log(err));
+    });
+  });
 
-
-    })
-
-    app.get("/api/articles", function (req, res) {
-
-        console.log("electric")
-        scrapeData().then((results) => {
-            // console.log(results)
-            results.forEach(article => {
-
-
-
-                db.Article.create(article)
-                    .then((addedArticle) => {
-
-                    })
-                    .catch((err) =>  console.log(err))
-            });
-
-
-
-            res.status(200).send("sent")
-
-        })
-    })
-
-
-    app.post("/api/save/article", function (req, res) {
-        db.Article.findOneAndUpdate({ _id: req.body.id }, { saved: true }).then((savedArticle) => {
-            // console.log(savedArticle)
-        })
-
-    })
-
-
-    app.post("/api/addNotes/:id", function (req, res) {
-        const articleId = req.params.id
-
-        const text = req.body
-
-        console.log(text)
-
-
-        db.Note.create(text)
-            .then((note) => {
-                // console.log(note)
-                return db.Article.findOneAndUpdate({ _id: articleId }, {$push: { note: note._id }}, { new: true })
-            })
-            .then((result) => {
-                // console.log(result)
-                res.status(200).end()
-            })
-            .catch(err => {
-                console.log(err)
-                res.status(400).end()
-            })
-
-    })
-
-    app.get("/api/getNotes/:id", function (req, res) {
-        const articleId = req.params.id
-
-        console.log(articleId)
-
-            db.Article.findOne({ _id: articleId })
-                .populate("note")
-                .exec((err, noteData) => {
-                    console.log("boogaloo")
-                    console.log(noteData.note)
-                    res.status(200).json(noteData.note)
-                })
-
-
-
-
-    })
-
-
-    app.delete("/api/delete/:noteId", function(req, res) {
-        db.Note.findOne({_id: req.params.noteId}).then(note => {
-            note.remove()
-            .then(success => console.log(success))
-            .catch(err => console.log(err))
-        })
-    })
-
-    app.get("/api/saved/articles", function (req, res) {
-
-        db.Article.find({ saved: true }).then(results => {
-
-            res.render("savedArticles", {
-                articles: results
-            })
-
-        })
-
-    })
-
-
-
-
-}
+  app.get('/api/saved/articles', function(req, res) {
+    db.Article.find({ saved: true }).then(results => {
+      res.render('savedArticles', {
+        articles: results,
+      });
+    });
+  });
+};
